@@ -23,7 +23,8 @@ helm repo update
 helm upgrade --install cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --set crds.enabled=true
+  --set crds.enabled=true \
+  --set global.leaderElection.namespace=cert-manager
 
 echo "Installing External Secrets Operator..."
 helm repo add external-secrets https://charts.external-secrets.io || true
