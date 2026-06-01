@@ -1,0 +1,36 @@
+name: Add Client Scaffold
+
+on:
+  workflow_dispatch:
+    inputs:
+      client_slug:
+        description: "Client slug, for example client-a"
+        required: true
+      domain:
+        description: "Client domain, for example client-a.com"
+        required: true
+
+jobs:
+  add-client:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate client scaffold
+        run: |
+          chmod +x scripts/add-client.sh
+          ./scripts/add-client.sh "${{ inputs.client_slug }}" "${{ inputs.domain }}"
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Add client scaffold: ${{ inputs.client_slug }}"
+          title: "Add client scaffold: ${{ inputs.client_slug }}"
+          body: "Adds initial GitOps scaffold for ${{ inputs.client_slug }}."
+          branch: "add-client-${{ inputs.client_slug }}"
