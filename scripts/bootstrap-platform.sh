@@ -54,11 +54,11 @@ helm upgrade --install kube-prometheus-stack \
   --set defaultRules.create=false \
   --set alertmanager.enabled=false
 
-helm upgrade --install loki grafana/loki \
-  --namespace observability
+# helm upgrade --install loki grafana/loki \
+#   --namespace observability
 
-helm upgrade --install tempo grafana/tempo \
-  --namespace observability
+# helm upgrade --install tempo grafana/tempo \
+#   --namespace observability
 
 echo "Applying base platform Gateway..."
 kubectl apply -f platform/gateway/platform-gateway.yaml
