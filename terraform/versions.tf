@@ -9,7 +9,7 @@ terraform {
   }
 
   backend "gcs" {
-    bucket = "REPLACE_WITH_TERRAFORM_STATE_BUCKET"
+    bucket = "pioneering-rex-466209-b8-terraform-state"
     prefix = "platform/bootstrap"
   }
 }
