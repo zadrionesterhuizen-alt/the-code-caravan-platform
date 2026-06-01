@@ -38,9 +38,12 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo add grafana https://grafana.github.io/helm-charts || true
 helm repo update
 
-helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
+helm upgrade --install kube-prometheus-stack \
+  prometheus-community/kube-prometheus-stack \
   --namespace observability \
   --create-namespace \
+  --set prometheusOperator.admissionWebhooks.enabled=false \
+  --set prometheusOperator.admissionWebhooks.patch.enabled=false \
   --set nodeExporter.enabled=false \
   --set kubeEtcd.enabled=false \
   --set kubeScheduler.enabled=false \
@@ -48,7 +51,8 @@ helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheu
   --set kubeProxy.enabled=false \
   --set coreDns.enabled=false \
   --set kubeDns.enabled=false \
-  --set prometheusOperator.admissionWebhooks.patch.enabled=false
+  --set defaultRules.create=false \
+  --set alertmanager.enabled=false
 
 helm upgrade --install loki grafana/loki \
   --namespace observability
