@@ -4,7 +4,7 @@ metadata:
   name: platform-gateway
   namespace: platform-gateway
 spec:
-  gatewayClassName: istio
+  gatewayClassName: gke-l7-global-external-managed
   listeners:
     - name: http
       port: 80

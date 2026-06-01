@@ -11,11 +11,11 @@ kubectl apply --server-side --force-conflicts -n argocd \
 echo "Installing Gateway API CRDs..."
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/latest/download/standard-install.yaml
 
-echo "Installing Istio..."
-curl -L https://istio.io/downloadIstio | sh -
-ISTIO_DIR=$(find . -maxdepth 1 -type d -name 'istio-*' | head -n 1)
-export PATH="$PWD/$ISTIO_DIR/bin:$PATH"
-istioctl install --set profile=default -y
+# echo "Installing Istio..."
+# curl -L https://istio.io/downloadIstio | sh -
+# ISTIO_DIR=$(find . -maxdepth 1 -type d -name 'istio-*' | head -n 1)
+# export PATH="$PWD/$ISTIO_DIR/bin:$PATH"
+# istioctl install --set profile=default -y
 
 echo "Installing cert-manager..."
 helm repo add jetstack https://charts.jetstack.io || true
