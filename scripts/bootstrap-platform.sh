@@ -40,7 +40,15 @@ helm repo update
 
 helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
   --namespace observability \
-  --create-namespace
+  --create-namespace \
+  --set nodeExporter.enabled=false \
+  --set kubeEtcd.enabled=false \
+  --set kubeScheduler.enabled=false \
+  --set kubeControllerManager.enabled=false \
+  --set kubeProxy.enabled=false \
+  --set coreDns.enabled=false \
+  --set kubeDns.enabled=false \
+  --set prometheusOperator.admissionWebhooks.patch.enabled=false
 
 helm upgrade --install loki grafana/loki \
   --namespace observability
